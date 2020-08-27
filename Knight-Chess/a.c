@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-//can be found at: https://www.geeksforgeeks.org/how-to-concatenate-two-integer-values-into-one/
+
 int concatInt(int a, int b) 
 {
-    char s1[20]; 
-    char s2[20]; 
+    //can be found at: https://www.geeksforgeeks.org/how-to-concatenate-two-integer-values-into-one/
+    char s1[2]; 
+    char s2[2]; 
   
     // Convert both the integers to string 
     sprintf(s1, "%d", a); 
@@ -25,27 +26,33 @@ int concatInt(int a, int b)
 
 int queueIsEmpty(int start, int end) 
 {
-    if(start >= end) return 1;
+    if(start > end) return 1;
     return 0;
 }
 
 int getNeighboor(int x, int y) {
-    int row = x % 10, col = y / 10;
-
-    if(x == 0 && row <= 6 && col >= 2) return(y-10+2);
-    else if(x == 1 && row <= 6 && col <= 7) return(y+10+2);
-    else if(x == 2 && row >= 3 && col >= 2) return(y-10-2);
-    else if(x == 3 && row >= 3 && col <= 7) return(y+10-2);
-    else if(x == 4 && row <= 7 && col >= 3) return(y-20+1);
-    else if(x == 5 && row <= 7 && col <= 6) return(y+20+1);
-    else if(x == 6 && row >= 2 && col >= 3) return(y-20-1);
-    else if(x == 7 && row >= 2 && col <= 6) return(y+20-1);
-    else return(-1);
+    int col = y / 10, row = y % 10;
+                                                      //  C,R
+    if(x == 0 && col <= 7 && row <= 6) return y+10+2; // (7,6)
+    if(x == 1 && col <= 7 && row >= 3) return y+10-2; // (7,3)
+    if(x == 2 && col >= 2 && row <= 6) return y-10+2; // (2,6)
+    if(x == 3 && col >= 2 && row >= 3) return y-10-2; // (2,3)
+    if(x == 4 && col <= 6 && row <= 7) return y+20+1; // (6,7)
+    if(x == 5 && col <= 6 && row >= 2) return y+20-1; // (6,2)
+    if(x == 6 && col >= 3 && row <= 7) return y-20+1; // (3,7)
+    if(x == 7 && col >= 3 && row >= 2) return y-20-1; // (3,2)
+    
+    return -1;
 }
 
 //finding the level of destination vertex to source vertex, we find the number of edges that separate both
 int BFS(int source, int destination)
 {
+    if(source == destination) {
+        printf("0");
+        return 1;
+    }
+
     int table[89], level[89], queue[89]; // table[11] = vertex(1,1) , table[33] = vertex(3,3), table[88] = vertex(8,8)
     int i, queue_start = 0, queue_end = 0, u, v;
     for (i = 0; i < 89; i++){
@@ -66,7 +73,7 @@ int BFS(int source, int destination)
         for(i = 0; i < 8; i++) {
             v = getNeighboor(i ,u);
 
-            if(v!= -1 && table[v] != 1) {
+            if(table[v] != 1 && v != -1) {
                 table[v] = 1;
                 queue[queue_end] = v;
                 queue_end++;
@@ -91,6 +98,8 @@ int main(int argc, char const *argv[])
     scanf("%d", &start_int);
     scanf(" %c", &end_char); 
     scanf("%d", &end_int);
+
+    //printf("\n%d %d\n", concatInt(start_char - 96, start_int), concatInt(end_char - 96, end_int));
 
     BFS(concatInt(start_char - 96, start_int), concatInt(end_char - 96, end_int));  
     return 0;
