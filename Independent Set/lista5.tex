@@ -1,0 +1,248 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\title{Avaliação Final TG}
+\author{Luiz Otavio Passos}
+\date{122039}
+
+\begin{document}
+
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 111111111111111111111111111111111111 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Responda as perguntas abaixo. Justifique as suas respostas utilizando conceitos de
+teoria dos grafos:}
+\subsection{Seja uma eleição em uma turma de 23 alunos em que todos os alunos são candidatos e
+cada aluno vota em exatamente 5 outros alunos. É possível que cada aluno tenha
+recebido votos dos mesmos alunos em que ele tenha votado?}
+
+Vamos definir o problema como sendo um grafo $G=(V,E)$ onde $|V| = 23$ que são os alunos e $E$ serão os votos. Para que cada aluno receba os mesmos 5 votos das pessoas que ele votou seria necessário que todos os 23 vértices tenham grau 5.\\
+
+Segundo o lema do aperto de mão, um grafo finito não-direcionado sempre terá um número par de vértices com grau ímpar, logo não é possível que os alunos recebam os mesmos 5 votos das pessoas que ele votou, pois isso implicaria em 23 vértices com grau 5.
+
+\subsection{Se um grafo G possui exatamente 2 vértices de grau ímpar, então G possui uma trilha
+euleriana?}
+
+$\Rightarrow$ Suponha um grafo $G$ conexo com uma trilha euleriana $v \rightarrow u$, é necessário que todos os vértices $w_i$ intermediários a trilha $v \rightarrow u$ tenham grau par, pois é necessária uma aresta para entrada no vértice e outra aresta para saída do mesmo vértice o que sempre resulta num par de arestas para os vértices intermediários. Para os vértices da ponta não seria necessário ter exatamente  pares de arestas incidentes, já que o vértice $v$ é onde começa a trilha e $u$ onde termina, dessa forma $v,u$ teriam uma aresta pra saída e outra para chegada respectivamente.
+
+$\Leftarrow$ Suponha que existam apenas 2 vértices $v,u$ de grau ímpar num grafo $G$. Suponha agora um grafo $G'$ formado pela adição de um novo vértice $w$ e das novas arestas $(v,w)$ e $(w,u)$, o que torna agora os graus de $v,u$ e $w$ pares e dessa forma o grafo não possui mais vértices com grau ímpar e agora ele apresenta um circuito euleriano que é uma trilha euleriana fechada, logo $G'$ é um grafo euleriano. Sabemos então que $G = G' / \{w\}$, dessa forma, ao remover $w$ de $G'$ e as suas arestas, teremos agora um trilha euleriana, com apenas os vértices $v,u$ com grau ímpar.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 2222222222222222222222222222222222222 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Prove ou mostre um contra-exemplo para as afirmações abaixo. Utilize conceitos de
+teoria dos grafos.}
+\subsection{Se G é um grafo simples com n vértices e exatamente n-1 arestas, então G tem algum vértice de grau 1 ou um vértice de grau 0.}
+ 
+
+Vamos supor um grafo $G$ conexo de com n vértices e n-1 arestas. Sabemos que um grafo com n vértices e n-1 arestas não possui ciclo. Para $n \geq 2$ o grafo será sempre um caminho, considerando dois vértices $v,u$ quaisquer como ínicio e fim desse caminho respectivamente, como o grafo não possui ciclos não há como esses vértices serem visitados novamente, dessa forma, tanto $v$ como $u$ possuem grau 1. \\
+
+Para o caso de um vértice com grau 0, $G$ pode ter 2 formas. A primeira onde $G$ possui $n=1$ e assim o número de arestas será 0, dessa forma $G$ tem apenas um vértice cujo grau é 0. A segunda forma é onde $G$ é um grafo desconexo formado por 2 componentes $G_1$ e $G_2$, onde $G_1$ possui exatamente $n-1$ vértices e $n-1$ arestas e $G_2$ é formado apenas por um vértice. Como $G_1$ tem número de vértices igual ao de arestas, pode ser que $G_1$ não possua vértices de grau 1 caso ele seja um grafo Hamiltoniano. Nesse caso, o vértice que forma $G_2$ terá grau 0 e assim afirmação continua correta, pois $|V|_{G_1} = n - 1$ e $|V|_{G_2} = 1$ logo $|V|_G = |V|_{G_1} + |V|_{G_2} = n$
+
+\subsection{Em qualquer grupo de duas ou mais pessoas sempre existem duas pessoas que possuem
+exatamente o mesmo número de amigos no grupo.}
+
+Definindo o problema como sendo um grafo, as pessoas são os vértices e as amizades as arestas, o número de amigos de tal pessoa é o grau do vértice. Logo, precisa-se provar que em um grafo não direcionado com no mínimo 2 vértices, sempre existiram 2 vértices com mesmo grau. \\
+
+Prova por indução:\\
+
+$C.B:$ Um grafo com 2 vértices, caso esteja conectado por uma aresta, ambos os vértices terão grau 1, caso seja desconexo, o grau desses vértices será 0. \\
+
+$H.I:$ Suponha um grafo $G$ com $k$ vértices onde pelo menos 2 desses vértices tem mesmo grau. Seja $d$ o conjunto de possíveis graus que cada vértice de $G$ pode ter;  $d = \{0,1,\dots, l-1,l,l+1,\dots, k-1\}$, sendo que no mínimo 2 vértices possuem mesmo grau, e pelo menos um desses $d_i$ graus do intervalo nenhum vértice possui (como 2 vértices tem mesmo grau, logo um não é possivel termos k vértices com k graus diferentes uma vez que temos 2 desses k vértices com mesmo grau)\\
+
+$P.I:$ Suponha agora um grafo $G'$ que é dada pela adição de um vértice $v$ ao grafo $G$. Se $v$ não for conectado ao grafo permanecerá com grau 0 e a $H.I$ se mantém. Caso uma aresta seja adicionada para conectar $v$ ao grafo existem diferentes situações a serem avaliadas:
+\begin{enumerate}
+    \item $v$ é conectado a um vértice de grau único, logo pela $H.I$ mantém-se os vértices de mesmo grau.
+    \item $v$ é conectado a um vértice $u$ de um par de vértices $u,w$ que possuem mesmo grau.
+
+Em 2 podem-ser destrinchados mais dois possíveis cenários (3 e 4)
+
+    \item Ao conectar $v$ a $u$, caso exista outro par de vértices com o mesmo grau, a $H.I$ permanece verdadeira.
+    
+    \item Ao conectar $v$ a $u$ e apenas o par $u,w$ com o mesmo grau $d_i$ existia no grafo. Suponha então que $l$ é o grau dos vértices $u,w$ antes de um $u$ ser conectado a $v$.
+
+A partir de 4 há mais dois novos cenários para analisar (5 e 6).
+
+    \item Suponha que nenhum vértice $v_i$ do grafo possuia  $d_i = l + 1$ (grau $l+1$), logo existia pelo menos um vértice $x$ com grau = 1. Com a conexão de $v$ a $u$, $v$ passa a ter grau = 1 logo, temos um novo par de vértices, $x,v$, com mesmo $d_i$ no grafo.
+    
+    \item Suponha que pelo menos um vértice $y$ do grafo possuia $d_i = l+1$ e que o $d_i$ que nenhum outro vértice possuia era $d_i \in d $ onde $ d_i\neq l+1$, em outra palavras, o grau que nenhum outro vértice possuia era qualquer grau de $d$ diferente de $l+1$. Nesse caso, ao conectar $v$ a $u$, $u$ que possuia grau $l$, com essa junção, passa a ter grau $l+1$, e agora o novo par com vértices de mesmo grau é $u,y$.
+
+\end{enumerate}
+
+Como o caso base e o passo indutivo estão corretos, logo a afirmação é verdadeira.
+
+\subsection{Se S é um clique máximo em G, então V\S é uma cobertura mínima no complemento de G.}
+
+
+
+
+ 
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 4444444444444444444444444444444444 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Considere o grafo abaixo com 6 vértices. Esse grafo é um grafo planar? Se for, desenhe-o
+de uma forma que as arestas não se cruzem. Se não, mostre que o grafo é não-planar.}
+Definindo o grafo como:
+
+
+\begin{center}
+    \includegraphics[width=0.7\textwidth]{ex1.png}
+\end{center}
+
+Podemos redesenhá-lo da seguinte forma:
+
+
+\begin{center}
+    \includegraphics[width=0.7\textwidth]{ex1.2.png}
+\end{center}
+
+Que nos dá o grafo $K_{3,3}$. \\
+
+Logo, como se trata do grafo $K_{3,3}$, pelo Teorema de Kuratowski, que diz que caso um grafo possua os grafos $K_5$ ou $K_{3,3}$ como subgrafo, esse grafo não será planar, logo o grafo acima é não-planar.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 55555555555555555555555555555555555 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Seja $\alpha$(G) o tamanho do conjunto estável máximo de G.}
+\subsection{Descreva um algoritmo eficiente que determina $\alpha$(G) para um grafo simples G quando cada vértice possui grau 2.}
+
+Sabemos que:
+\begin{center}
+    $\alpha$(G) + $\beta$(G) = v(G)
+\end{center}
+Logo:
+
+\begin{center}
+    $\alpha$(G) = v(G) - $\beta$(G)
+\end{center}
+
+v(G) corresponde ao número de vértices do grafo. Ao se encontrar $\beta$(G), que corresponde a cardinalidade da cobertura mínima de vértices do grafo, podemos subtrair $\beta$(G) de v(G) que nos resultará na cardinalidade de $\alpha$(G).\\
+
+Como cada vértice possui exatamente grau 2 (todos os vértices têm grau par), podemos dizer então que se trata de um grafo com circuito euleriano, e sabemos que se um grafo possui um circuito euleriano, logo o grafo possui um ciclo, e que nesse caso em específico o grafo será formado exatamente por um ciclo. Pode-se dizer então que o grafo sempre terá a forma de um polígono. \\
+
+Para o algoritmo, precisamos encontrar o menor número de vértices que cubra todas as arestas do grafo. \\
+
+Vamos começar aplicando o algoritmo de BFS no grafo, a partir de um vértice inicial $s$ qualquer. O algoritmo BFS nos dará o "nível" que cada vértice foi descoberto.\\
+
+Vemos abaixo dois exemplos diferentes de como os grafos ficarão dividos por nível após a rodagem do BFS, uma de um grafo com v(G) = 8, e outro com v(G) = 9: 
+
+\begin{center}
+v(G) = 8
+    \includegraphics[width=0.7\textwidth]{ex5ap.png}
+\end{center}
+
+\begin{center}
+v(G) = 9
+    \includegraphics[width=0.7\textwidth]{ex5ai.png}
+\end{center}
+O vértice $s$ por ser o vértice de ínicio do BFS, e também a raiz da BFS-tree, sempre ficará isolado em seu nível, o qual será sempre 0.\\
+Vamos definir o número de níveis como sendo $l$.
+\begin{itemize}
+    \item Para grafos em que v(G) for par, teremos $l = \frac{v(g)}{2} + 1$, e o último nível com apenas um vértice.
+    \item Para grafos em que v(G) for ímpar, teremos $l = \lfloor\frac{v(g)}{2}\rfloor + 1$, e o último nível com 2 vértices.
+\end{itemize}
+
+Em ambos os casos acima, os níveis entre o primeiro e o último vértice sempre terão 2 vértices cada. \\
+
+Sempre escolheremos os vértices presentes nos níveis ímpares pois esses vértices cobrem as arestas que saem do nível par anterior e as que partem para o nível par seguinte.
+
+
+Temos agora 4 cenários diferentes para cálculo de $\beta(G)$. \\
+
+\textbf{Caso 1: v(G) par e $l$ par}: $\beta(G)$ será dado pelo número de vértices em cada $l_i$ ímpar, porém como o último nível será ímpar com apenas um vértice basta subtrair 1 do resultado da multiplicação.
+\begin{center}
+    $\beta$(G) = $\frac{\lfloor\frac{v(g)}{2}\rfloor}{2} * {2}$ - 1 
+\end{center}
+
+\textbf{Caso 2: v(G) par e $l$ ímpar}: $\beta(G)$ será dado pelo número de vértices em cada $l_i$ ímpar, como o útimo nível será par basta apenas fazer a multiplicação.
+\begin{center}
+    $\beta$(G) = $\frac{\lfloor\frac{v(g)}{2}\rfloor}{2} * {2}$ 
+\end{center}
+
+\textbf{Caso 3: v(G) ímpar e $l$ par}: $\beta(G)$ será dado pelo número de vértices em cada $l_i$ ímpar, como o último nível será impar com 2 vértices, basta apenas fazer a multiplicação.
+\begin{center}
+    $\beta$(G) = $\frac{\lfloor\frac{v(g)}{2}\rfloor}{2} * {2}$ 
+\end{center}
+
+\textbf{Caso 4: v(G) ímpar e $l$ ímpar}: $\beta(G)$ será dado pelo número de vértices em cada $l_i$ ímpar, como o último nível será par com 2 vértices basta somar + 1 ao resultado da multiplicação a fim de contabilizar a última aresta que une os vértices desse último nível. \\ 
+\begin{center}
+    $\beta$(G) = $\frac{\lfloor\frac{v(g)}{2}\rfloor}{2} * {2}$ + 1
+\end{center}
+
+A multiplicação:
+
+
+
+\begin{center}
+    $\beta$(G) = $\frac{\lfloor\frac{v(g)}{2}\rfloor}{2} * {2}$
+\end{center}
+Simplificando teremos:
+
+\begin{center}
+    $\beta(G)$ =  $\lfloor\frac{v(g)}{2}\rfloor$
+\end{center}
+
+
+Para calcular $\alpha$(G) em um grafo com vértices de grau 2, basta seguir o algoritmo abaixo: \\
+
+
+\begin{enumerate}
+    \item $l$ = $\lfloor\frac{v(g)}{2}\rfloor + 1 $
+    \item $\beta(G)$ = $\lfloor\frac{v(g)}{2}\rfloor$
+    \item Se $v(g)$ e $l$ forem ímpares : $\beta(G)$  = $\beta(G)$ + 1.
+    \item Se $v(g)$ e $l$ forem pares : $\beta(G)$  = $\beta(G)$ - 1.
+    \item $\alpha$(G) = v(G) - $\beta$(G)
+\end{enumerate}
+
+
+
+\subsection{Analise o seu tempo de execução e mostre que o algoritmo é correto.}
+Como o algoritmo é basicamente formado por atribuições e operações matemáticas o seu tempo de execução é constante com complexidade O(1).\\
+
+\textbf{Provando a corretude por indução:}\\
+
+$C.B:$ Em um grafo com 3 vértices e 3 arestas: $\beta(G) = 2$ , logo $\alpha(G) = 3 - 2$ e assim $\alpha(G)$ = 1. \\
+
+$H.I$ Suponha que o algoritmo apresentado em $5.1$ é correto para um grafo $G$ com $n$ vértices.
+
+$P.I$ Suponha agora um grafo com $G'$ que será formado pela adição de um novo vértice $v$ a $G$.\\
+
+
+Sabemos que a equação abaixo é valida para todo grafo conexo e não direcionado, logo não há nada a provar
+\begin{center}
+    $\alpha$(G') = v(G') - $\beta$(G')
+\end{center}
+
+
+A partir dos casos 1, 2, 3 e 4 descritos em $5.1$ teremos mais 4 "novos" casos ao se adicionar o novo vértice $v$. Para facilitar a prova, $v$ sempre será adicionado ao último nível, que caso já esteja com 2 vértices, um novo nível $l_i$ será criado no grafo $G'$ após aplicada a busca BFS. A inserção de $v$ em G respeita a restrição de grau 2 para todo vértice:
+\begin{itemize}
+    \item Caso o último nível esteja com 2 vértices $u,w$, a aresta $(u,w)$ será removida e inserida 2 novas arestas: $(u,v)$ e $(v,w)$.
+    \item Caso o último nível esteja com 1 vértice $u$, a aresta $(u,v)$ será criada, e seja $(w,u)$ uma aresta que liga $u$ ao nível anterior, essa aresta será removida e em seguida inserida a aresta $(w,v)$.
+    
+\end{itemize}\\
+
+\textbf{Caso 5: v(G) par e $l$ par $\cup$ $v$}: com a adição de $v$ teremos agora \textbf{v(G') ímpar e $l$ se mantendo par}, pois no último nível para o caso 1 havia apenas 1 vértice e agora 2, não precisando criar outro nível. Logo o \textbf{caso 5} de $G'$ é igual ao \textbf{caso 3} de $G$. \\
+
+\textbf{Caso 6: v(G) par e $l$ ímpar $\cup$ $v$}: com a adição de $v$ teremos agora \textbf{ v(G') ímpar e $l$ se mantendo ímpar}, pois no último nível para o caso 2 havia apenas 1 vértice e agora 2, não precisando criar outro nível. Logo o \textbf{caso 6} de $G'$ é igual ao \textbf{caso 4} de $G$. \\
+
+\textbf{Caso 7: v(G) ímpar e $l$ par $\cup$ $v$}: com a adição de $v$ teremos agora \textbf{ v(G') par e $l$ virando ímpar}, pois no último nível para o caso 3 já havia 2 vértices, sendo necessário então criar outro nível. Logo o \textbf{caso 7} de $G'$ é igual ao \textbf{caso 2} de $G$. \\
+
+\textbf{Caso 8: v(G) ímpar e $l$ ímpar $\cup$ $v$}: com a adição de $v$ teremos agora \textbf{ v(G') par e $l$ virando par}, pois no último nível para o caso 4 já havia 2 vértices, sendo necessário então criar outro nível. Logo o \textbf{caso 8} de $G'$ é igual ao \textbf{caso 1} de $G$. \\
+
+Como a $H.I$ se manteve verdadeira nos novos cénarios 5, 6, 7 e 8 do $P.I$ e o $C.B$ é verdadeiro, então está provada a corretude do algoritmo. 
+
+
+\end{document}
+
+
